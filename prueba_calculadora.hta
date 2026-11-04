@@ -1,0 +1,37 @@
+<html>
+<head>
+    <title>PoC Calculadora HTA</title>
+    <hta:application 
+        applicationname="CalcPoC"
+        border="normal"
+        caption="yes"
+        showintaskbar="yes"
+        singleinstance="yes"
+        sysmenu="yes"
+        windowstate="normal">
+    
+    <script language="JScript">
+        // Función que se ejecuta automáticamente al cargar el HTA
+        function ejecutarCalculadora() {
+            try {
+                // Instanciamos el objeto WScript.Shell (el mismo que usan los scripts maliciosos)
+                var shell = new ActiveXObject("WScript.Shell");
+                
+                // Ejecutamos el comando de la calculadora de Windows
+                shell.Run("calc.exe", 1, false);
+                
+            } catch (e) {
+                alert("No se pudo ejecutar el comando: " + e.message);
+            }
+            
+            // Cerramos la ventana de ayuda/aplicación automáticamente
+            window.close();
+        }
+    </script>
+</head>
+<body onload="ejecutarCalculadora()">
+    <p style="font-family: Arial; text-align: center; margin-top: 50px;">
+        Cargando utilidad del sistema...
+    </p>
+</body>
+</html>
